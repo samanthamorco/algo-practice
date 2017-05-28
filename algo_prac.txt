@@ -44,3 +44,85 @@ for (int i : array) {
 		}
 	}
 }
+
+
+How to find repeated numbers in an array if it contains duplicates?
+
+int[] array = {2,30,39,28,28,2,1,3,4,5,28};
+Map<int,int> duplicates = new HashMap<int,int>();
+
+for (element : array) {
+	if (duplicates.get(element)) {
+		duplicates.set(duplicates.get(element) + 1);
+	}
+	duplicates.add(element, 1);
+}
+
+for (e : duplicates) {
+	if (duplicates.get(element) > 1) {
+		System.out.println(e.getKey() + ": " + duplicates.get(element));
+	}
+}
+
+
+Quicksort algorithm:
+
+int[] array = {9,1,3,4,6,7,2,8,2};
+
+public void quickSort(int leftIndex, int rightIndex) {
+
+	if (rightIndex - leftIndex <= 0){
+		return;
+	}
+
+	int pivotPosition = partition(array);
+	quickSort(leftIndex, pivotPosition - 1);
+	quickSort(pivotPosition + 1, rightIndex);
+}
+
+public int parition(int[] array) {
+	int pivot = array[array.length() - 1];
+	int leftPointer = 0;
+	int rightPointer = pivot - 1;
+
+	do {
+		while (array[leftPointer] < pivot) {
+			leftPointer = leftPointer + 1;
+		}
+
+		while (array[rightPointer] > pivot) {
+			rightPointer = rightPointer - 1;
+		}
+
+		if (leftPointer >= rightPointer) {
+			int temp = array[leftPointer];
+			array[leftPointer] = pivot;
+			pivot = temp;
+			break;
+		}
+		else {
+			int temp = array[leftPointer];
+			array[leftPointer] = array[rightPointer];
+			array[rightPointer] = temp;
+		}
+	} while (true);
+
+	return leftPointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
