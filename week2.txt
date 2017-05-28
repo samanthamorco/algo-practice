@@ -1,0 +1,23 @@
+Write a program to remove duplicates from array
+
+array = [1,2,3,1,2,3,1,2,3,1,2,3]
+hash = {}
+new_array = []
+
+array.each do |number|
+  unless hash[number]
+    hash[number] = 1
+    new_array << number
+  end
+end
+
+return new_array
+
+Write a program to find intersection of two sorted array
+
+array1 = [2,4,6,8,10,12]
+array2 = [1,2,3,4,5,6,7,9,11]
+
+non_alike = array1 - array2
+alike = array1 - non_alike
+return alike
