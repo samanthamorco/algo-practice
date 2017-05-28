@@ -1,0 +1,47 @@
+2. How to find duplicate number on Integer array.
+
+numbers = [1,2,3,4,5,6,3,7,8,10]
+
+hash = {}
+numbers.each do |number|
+  if hash[number]
+    hash[number] += 1
+  else
+    hash[number] = 1
+  end
+end
+
+hash.each do |key, value|
+  if value > 1
+    puts key
+    break
+  end
+end
+
+
+
+O(2n)
+
+4. How to find largest and smallest number in unsorted array?
+
+numbers = [10,3,2,45,23,1,5,56,7567,23]
+
+biggest = numbers[0]
+smallest = numbers[1]
+
+if biggest < smallest
+  biggest, smallest = smallest, biggest
+end
+
+numbers.each do |num|
+  if num > biggest
+    biggest = num
+  elsif num < smallest
+    smallest = num
+  end
+end
+
+puts biggest
+puts smallest
+
+
