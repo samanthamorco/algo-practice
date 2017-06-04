@@ -1,0 +1,106 @@
+2. How to find duplicate number on Integer array.
+
+numbers = [1,2,3,4,5,6,3,7,8,10]
+
+hash = {}
+numbers.each do |number|
+  if hash[number]
+    hash[number] += 1
+  else
+    hash[number] = 1
+  end
+end
+
+hash.each do |key, value|
+  if value > 1
+    puts key
+    break
+  end
+end
+
+
+
+O(2n)
+
+4. How to find largest and smallest number in unsorted array?
+
+numbers = [10,3,2,45,23,1,5,56,7567,23]
+
+biggest = numbers[0]
+smallest = numbers[1]
+
+if biggest < smallest
+  biggest, smallest = smallest, biggest
+end
+
+numbers.each do |num|
+  if num > biggest
+    biggest = num
+  elsif num < smallest
+    smallest = num
+  end
+end
+
+puts biggest
+puts smallest
+
+
+7. Write a program to remove duplicates from array
+
+array = [1,2,3,1,2,3,1,2,3,1,2,3]
+hash = {}
+new_array = []
+
+array.each do |number|
+  unless hash[number]
+    hash[number] = 1
+    new_array << number
+  end
+end
+
+return new_array
+
+9. Write a program to find intersection of two sorted array
+
+array1 = [2,4,6,8,10,12]
+array2 = [1,2,3,4,5,6,7,9,11]
+
+non_alike = array1 - array2
+alike = array1 - non_alike
+return alike
+
+# quick select
+
+def partition(array_input)
+  pivot = array_input.length - 1
+  left_pointer = 0
+  right_pointer = array_input.lenght - 2
+
+  while array_input[left_pointer] < array_input[pivot]
+    left_pointer += 1
+  end
+
+  while array_input[right_pointer] > array_input[pivot]
+    right_pointer -=1
+  end
+
+  if left_pointer >= right_pointer
+    array_input[pivot], array_input[left_pointer] = array_input[left_pointer], array_input[pivot]
+    return left_pointer
+  else
+    array_input[left_pointer], array_input[right_pointer] = array_input[right_pointer], array_input[left_pointer]
+    parition(array_input)
+  end
+end
+
+def quick_select(array_input, desired_index)
+  pivot_index = partition(array_input)
+  if pivot_index > desired_index
+    quick_select(array_input[0..desired_index], desired_index)
+  elsif pivot_index < desired_index
+    quick_select(array_input[desired_index..(array_input.length - 1)], desired_index)
+  else
+    array_input(pivot_index)
+  end
+end
+end
