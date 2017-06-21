@@ -45,3 +45,24 @@ puts biggest
 puts smallest
 
 
+---
+
+How to find top two numbers from an integer array?
+array = [23,12,54,22,67,1,3,6,123,18,32]
+
+big_1 = array[0]
+big_2 = array[1]
+
+if big_2 > big_1
+  big_1, big_2 = big_2, big_1
+end
+
+array.each do |number|
+  if number > big_1
+    big_2 = big_1
+    big_1 = number
+  elsif number > big_2
+    big_2 = number
+  end
+end
+--
