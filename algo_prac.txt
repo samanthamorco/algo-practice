@@ -247,26 +247,107 @@ for k, v in change_back.items():
     print(v)
 
 
+Number Names - Show how to spell out a number in English. You can use a preexisting implementation or roll your own, but you should support inputs up to at least one million (or the maximum value of your language's default bounded integer type, if that's less). Optional: Support for inputs other than positive integers (like zero, negative integers, and floating-point numbers).
 
 
+to start: 1-100
+
+numbers_single = {"1": "one", "2": "two", "3": "three", "4": "four", "5": "five", "6": "six", "7": "seven", "8": "eight", "9": "nine"}
+numbers_double = {"10": "ten", "11": "eleven", "12": "twelve", "13": "thirteen", "14": "fourteen", "15": "fifteen", "16": "sixteen", "17": "seventeen", "18": "eighteen", "19": "nineteen", "2": "twenty", "3": "thirty", "4": "forty", "5": "fifty", "6": "sixty", "7": "seventy", "8": "eighty", "9": "ninety"}
+
+def spell_number(number):
+    number = str(number)
+    x = ""
+
+    if len(number) == 3:
+        x = numbers_single[number[0]] + " hundred "
+        if number[1:] in numbers_double:
+            x += numbers_double[number[1:]]
+        x += last_two_digits(number, x)
+
+    elif len(number) == 2:
+        if number[0:] in numbers_double:
+            x = numbers_double[number[0:]]
+        x += last_two_digits(number, x)
+
+    else:
+        x = numbers_single[number[0]]
+
+    return x
+
+def last_two_digits(number, x):
+    if number[-2] in numbers_double and number[-1] in numbers_single:
+        return numbers_double[number[-2]] + " " + numbers_single[number[-1]]
+    else:
+        return ""
 
 
+print(spell_number(19))
 
 
+Count Vowels - Enter a string and the program counts the number of vowels in the text. For added complexity have it report a sum of each vowel found.
+
+vowels = {'a', 'e', 'i', 'o', 'u'}
+
+def count_vowels(word):
+    counter = 0
+    for letter in word:
+        if letter in vowels:
+            counter += 1
+    return counter
+
+print(count_vowels('ham sandwich'))
 
 
+An animal shelter holds only dogs and cats, and operates on a strictly “first in, first out” basis. People just adopt either the “oldest” (based on arrival time) of all animals at the shelter (they cannot select which type of animal they get in this scenario), or they can select whether they would prefer a dog or cat (and will receive the oldest animal of that type). In the latter scenario, they cannot select which specific animal they would like.
 
+# NOT THE MOST EFFICIENT, HAVE TWO QUEUES ONE DOG, ONE CAT, KEEP TRACK OF TIME THERE
 
+class Animal:
+    def __init__(self, name, type):
+        self.name = name
+        self.type = type
 
+dog1 = Animal('dog1', 'dog')
+dog2 = Animal('dog2', 'dog')
+dog3 = Animal('dog3', 'dog')
+dog4 = Animal('dog4', 'dog')
+cat1 = Animal('cat1', 'cat')
+cat2 = Animal('cat2', 'cat')
+cat3 = Animal('cat3', 'cat')
 
+shelter1 = [cat2, cat3, dog4, dog3, cat1, dog2, dog1]
+shelter2 = []
 
+def shifting(choice, shelter_to, shelter_from):
+    temp_animal = shelter_from.pop(0)
+    while temp_animal.type != choice:
+        shelter_to.append(temp_animal)
+        temp_animal = shelter_from.pop(0)
+    while shelter_from and shelter_to:
+        shelter_to.append(shelter_from.pop(0))
+    return temp_animal
 
+def adopt_animal(choice=None):
+    if choice == None:
+        if shelter1:
+            return shelter1.pop(0)
+        else:
+            return shelter2.pop(0)
+    elif choice == 'dog':
+        if shelter1:
+            return shifting('dog', shelter2, shelter1)
+        else:
+            return shifting('dog', shelter1, shelter2)
+    else:
+        if shelter1:
+            return shifting('cat', shelter2, shelter1)
+        else:
+            return shifting('cat', shelter1, shelter2)
 
-
-
-
-
-
+print(adopt_animal().name)
+print(adopt_animal('dog').name)
+print(adopt_animal('cat').name)
 
 
 
