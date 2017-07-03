@@ -1,23 +1,19 @@
 How to find all pairs on an integer array whose sum is equal to given number?
 
 Example input:
-int[] array = {9,1,3,4,6,7,2,8,2};
-int sum = 10;
+numbers = [9,1,3,4,6,7,2,8,2]
+sum = 10
+pairs = {}
 
-Map<int,int> pairs = new HashMap<int,int>();
-for (int i : array) {
-	pairs.put(i, "");
-}
-for (int i : array) {
-	int additive = sum - element;
-	if (pairs.get(i) == "") {
-		pairs.put(i, additive.toString());
-		System.out.println(element.toString() + ", " + additive.toString());
-		if (pairs.get(additive)) {
-			pairs.remove(additive);
-		}
-	}
-}
+for number in numbers:
+    print(pairs)
+    additive = sum - number
+    if additive in pairs:
+        pairs[additive] = number
+    elif number not in pairs:
+        pairs[number] = None
+
+print(pairs)
 
 
 How to find repeated numbers in an array if it contains duplicates?
@@ -26,8 +22,8 @@ int[] array = {2,30,39,28,28,2,1,3,4,5,28};
 Map<int,int> duplicates = new HashMap<int,int>();
 
 for (int element : array) {
-	if (duplicates.get(element)) {
-		duplicates.set(duplicates.get(element) + 1);
+	if (duplicates.containsKey(element)) {
+		duplicates.put(element, sduplicates.get(element) + 1);
 	}
 	duplicates.add(element, 1);
 }
@@ -162,14 +158,14 @@ for (int i : input3) {
 How find the first repeating element in array of integers?
 
 input = [10, 5, 3, 4, 3, 5]
-duplicates = {}
+duplicates = set()
 
 for element in input:
     if element in duplicates:
         print(element)
         break
     else:
-        duplicates[element] = 1
+        duplicates.add(element)
 
 
 How to find the first non-repeating element in an array of integers?
@@ -234,7 +230,7 @@ cost = 9.48
 given = 10
 
 change_back = {'pennies': 0, 'nickels': 0, 'dimes': 0, 'quarters': 0}
-change = {25: 'quarters', 1: 'dimes', 05: 'nickels', 01: 'pennies'}
+change = {25: 'quarters', 1: 'dimes', 5: 'nickels', 1: 'pennies'}
 remainder = (given * 100) - (cost * 100)
 
 for denomination in change:
